@@ -27,14 +27,15 @@
       <div class="twelve columns">
         <h2>Questions?</h2>
         <form action="question" method="post" class="nice">
-          <input type="textfield" class="input-text" />
-          <textarea class="input-text" rows="5" columns="12"></textarea>
+          <input name="name" type="textfield" class="input-text" />
+          <textarea name="question" class="input-text" rows="5" columns="12"></textarea>
         </form>
 
-
         <% @questions.each do |question| %>
-            <h3><%= question.name %></h3>
-            <p><%= question.body %></p>
+          <article>
+            <h1><%= h question.name %></h3>
+            <p><%= h question.question %></p>
+          </article>
         <% end %>
       </div>
     </div>
