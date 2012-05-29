@@ -20,15 +20,26 @@
   <![endif]-->
   <script src="/javascripts/jquery.min.js" type="text/javascript"></script>
   <script src="/javascripts/jquery.reveal.js" type="text/javascript"></script>
+  <script src="/javascripts/jquery.orbit-1.4.0.js" type="text/javascript"></script>
+  <script type="text/javascript">
+     $(window).load(function() {
+         $('#slides').orbit();
+     });
+  </script>
 </head>
 <body>
   <!-- container -->
   <div class="container">
-
     <div class="row">
-      <div class="six columns three-up">
+      <div class="six columns">
         <h1>Questions?</h1>
-        <a class="nice green round button full-width" data-reveal-id="question-form">Ask!</a>
+      </div>
+      <div class="six columns">
+        <a class="radius green button full-width" data-reveal-id="question-form">Ask!</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
         <div id="question-form" class="reveal-modal">
           <h2>Just ask!</h2>
           <form action="question" method="post" class="nice">
@@ -36,16 +47,25 @@
             <input name="name" type="textfield" class="input-text expand" id="name" />
             <label for="question">The question:</label>
             <textarea name="question" class="input-text expand" id="question" rows="5" columns="12"></textarea>
-            <input class="nice green round button full-width" type="submit" value="Ask!" />
+            <input class="radius green button full-width" type="submit" value="Ask!" />
           </form>
           <a class="close-reveal-modal">&#215;</a>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="twelve columns">
+        <div id="slides">
+        <% @questions.each do |question| %>
+          <img src="/images/<%= question.id %>.jpg" alt="<%= h question.question %>" data-caption="#question-<%= question.id %>" />
+        <% end %>
+        </div>
 
         <% @questions.each do |question| %>
-          <article>
-            <h1><%= h question.name %></h3>
-            <p><%= h question.question %></p>
-          </article>
+          <span class="orbit-caption" id="question-<%= question.id %>">
+            <cite><%= h question.question %></cite>
+            <br /><strong class="name">-- <%= h question.name %></strong>
+          </span>
         <% end %>
       </div>
     </div>
