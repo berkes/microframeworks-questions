@@ -1,4 +1,43 @@
-<% @questions.each do |question| %>
-    <h3><%= question.name %></h3>
-    <p><%= question.body %></p>
-<% end %>
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Any Questions?</title>
+
+  <link href="/stylesheets/foundation.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/app.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+  <!--[if IE lt 9]>
+      <link href="/stylesheets/ie.css" rel="stylesheet" type="text/css" />
+  <![endif]-->
+</head>
+<body>
+  <!-- container -->
+  <div class="container">
+
+    <div class="row">
+      <div class="twelve columns">
+        <h2>Questions?</h2>
+        <form action="question" method="post" class="nice">
+          <input type="textfield" class="input-text" />
+          <textarea class="input-text" rows="5" columns="12"></textarea>
+        </form>
+
+
+        <% @questions.each do |question| %>
+            <h3><%= question.name %></h3>
+            <p><%= question.body %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
