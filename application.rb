@@ -19,3 +19,9 @@ DataMapper.finalize
 
 # automatically create the question table
 Question.auto_upgrade!
+
+get '/' do
+    # get the latest 20 posts
+    @questions = Question.all(:order => [ :id.desc ], :limit => 20)
+    erb :index
+end
