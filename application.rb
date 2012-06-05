@@ -1,5 +1,6 @@
 require "rubygems"
 require "sinatra"
+require "rack-flash"
 require "data_mapper"
 require "dm-sqlite-adapter"
 
@@ -26,6 +27,10 @@ DataMapper.finalize
 # automatically create the question table
 Question.auto_upgrade!
 
+# set flash messages.
+enable :sessions
+use Rack::Flash
+
 before do
   content_type :html, 'charset' => 'utf-8'
 end
@@ -33,13 +38,12 @@ end
 # get the latest 20 Questions
 get '/' do
   @questions = Question.all(:order => [ :id.desc ], :limit => 20)
+  @message = flash
   erb :index
 end
 
 #Make a new question
 post '/question' do
-  flash = {}
-
   # Quick roundtrip for basic requirement checking on the form.
   %w{name question}.each do |field|
     flash[:error] = "#{field.capitalize} is required" if params[field].nil? or params[field] == ""
@@ -51,7 +55,8 @@ post '/question' do
   # Requirements met? then try to save the post.
   if flash[:error].nil?
     Question.new(:name => params[:name], :question => params[:question], :created_at => Time.now).save!
-    flash[:message] = "Question saved. Thanks <em>#{ h params[:name] }</em>"
+    flash[:notice] = "Question saved. Thanks <em>#{ h params[:name] }</em>"
   end
-  flash.inspect
+
+  redirect "/"
 end
