@@ -43,7 +43,10 @@ post '/question' do
   # Quick roundtrip for basic requirement checking on the form.
   %w{name question}.each do |field|
     flash[:error] = "#{field.capitalize} is required" if params[field].nil? or params[field] == ""
+    flash[:error] = "Max 160 characters allowed!" if params[field].size > 160 
   end
+
+  # find out if the max characters for question is not surpassed.
 
   # Requirements met? then try to save the post.
   if flash[:error].nil?
