@@ -21,22 +21,46 @@
   <link href='http://fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'>
   <script src="/javascripts/jquery.min.js" type="text/javascript"></script>
   <script src="/javascripts/jquery.reveal.js" type="text/javascript"></script>
-  <script src="/javascripts/jquery.orbit-1.4.0.js" type="text/javascript"></script>
-  <script type="text/javascript">
-     $(window).load(function() {
-         $('#slides').orbit();
-     });
+  <script>
+    function nextSlide() {
+      var active = $('#questions .question.active');
+      var next = active.next();
+
+      active.fadeOut("slow", "swing").removeClass('active').next().fadeIn("slow", "swing").addClass('active');
+    }
+    function prevSlide() {
+      var active = $('#questions .question.active');
+      var prev = active.prev();
+
+      prev.addClass('active').show();
+      active.removeClass('active').hide();
+    }
+
+    $(function() {
+      //Make the data-dash-image stuffs the backgrounds and preload.
+      $('#questions .question').each(function() {
+        var c = new Image();
+        var path = $(this).data("image");
+        $(this).css('background-image', 'url('+ path +')');
+        c.src = path;
+      });
+
+      //Attach onclick on .next and prev
+      $("a.next").click(function() {
+        nextSlide();
+      });
+      $("a.prev").click(function() {
+        prevSlide();
+      });
+    });
   </script>
 </head>
 <body>
   <!-- container -->
   <div class="container">
     <div class="row">
-      <div class="six columns">
-        <h1>Questions?</h1>
-      </div>
-      <div class="six columns">
-        <a class="radius green button full-width" data-reveal-id="question-form">Ask!</a>
+      <div class="twelve columns">
+        <a class="radius green button full-width" data-reveal-id="question-form"><strong>&#8615;</strong> Ask!</a>
       </div>
     </div>
     <div class="row">
@@ -54,22 +78,20 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="twelve columns">
-        <div id="slides">
-        <% @questions.each do |question| %>
-          <img src="/images/<%= question.id %>.jpg" alt="<%= h question.question %>" data-caption="#question-<%= question.id %>" />
+  </div>
+  <div id="questions">
+    <% @questions.each_with_index do |question, index| %>
+      <div class="question<%= " active" if index == 0 %>" id="q-<%= question.id %>" data-image="/images/<%= question.id %>.jpg">
+        <cite><%= h question.question %></cite>
+        <strong class="name">&#150; <%= h question.name %></strong>
+        <% if index < @questions.size %>
+          <a href="#q-<%= question.id %>" class="next">&#8594;</a>
         <% end %>
-        </div>
-
-        <% @questions.each do |question| %>
-          <span class="orbit-caption" id="question-<%= question.id %>">
-            <cite><%= h question.question %></cite>
-            <br /><strong class="name">-- <%= h question.name %></strong>
-          </span>
+        <% if index > 0 %>
+          <a href="#q-<%= question.id %>" class="prev">&#8592;</a>
         <% end %>
       </div>
-    </div>
+    <% end %>
   </div>
 </body>
 </html>
