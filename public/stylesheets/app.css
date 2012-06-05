@@ -1,0 +1,88 @@
+/* Artfully masterminded by ZURB  */
+/* line 10, ../sass/app.scss */
+body, html {
+  height: 100%;
+}
+
+/* line 13, ../sass/app.scss */
+h1, h2, h3, h4, h5, cite {
+  font-family: 'Berkshire Swash', cursive;
+}
+
+/* line 17, ../sass/app.scss */
+body {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* line 27, ../sass/app.scss */
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3em;
+  z-index: 99;
+}
+
+/* line 38, ../sass/app.scss */
+#questions .question {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: none;
+}
+/* line 53, ../sass/app.scss */
+#questions .question cite {
+  font-size: 6em;
+  line-height: 1em;
+  padding: 1em;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #000;
+  position: absolute;
+  top: 80px;
+  left: 80px;
+}
+/* line 63, ../sass/app.scss */
+#questions .question .name {
+  font-size: 2em;
+  padding: 1em;
+  background-color: #fff;
+  color: #000;
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+}
+/* line 73, ../sass/app.scss */
+#questions .question.active {
+  display: block;
+}
+/* line 76, ../sass/app.scss */
+#questions .next, #questions .prev {
+  position: absolute;
+  top: 0;
+  z-index: 100;
+  font-size: 1.4em;
+  background-color: #fff;
+  padding: 0.4em;
+}
+/* line 86, ../sass/app.scss */
+#questions .next {
+  right: 0;
+}
+/* line 89, ../sass/app.scss */
+#questions .prev {
+  left: 0;
+}
