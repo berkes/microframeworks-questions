@@ -97,7 +97,7 @@
   </div>
   <div id="questions">
     <% @questions.each_with_index do |question, index| %>
-      <div class="question<%= " active" if index == 0 %>" id="q-<%= question.id %>" data-image="/images/<%= question.id %>.jpg">
+      <div class="question<%= " active" if index == 0 %>" id="q-<%= question.id %>" data-image="/images/<%= question.id % 15 %>.jpg">
         <cite><%= h question.question %></cite>
         <strong class="name">&#150; <%= h question.name %></strong>
         <% if index < @questions.size %>
