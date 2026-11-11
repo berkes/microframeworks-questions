@@ -1,4 +1,3 @@
-microframeworks-questions
-=========================
+# microframeworks-questions
 
-Example sinatra app for a presentation on microframeworks.
+This repository has been moved to https://github.com/berkes/presentations/tree/main/microframeworks-questions
